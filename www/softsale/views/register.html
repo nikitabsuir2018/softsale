@@ -1,0 +1,35 @@
+<div ng-controller="RegisterController">
+<section>
+	<div class="col-sm-8 col-sm-offset-2 col-xs-12">
+		<h1>Регистрация</h1>
+		<form name="form_register" role="form">
+			<div class="form-group">
+				<label>Логин</label>
+				<input type="text" class="form-control" required ng-model="current.login">
+			</div>
+			<div class="form-group">
+				<label>Пароль</label>
+				<input type="password" class="form-control" required ng-model="current.password">
+			</div>
+			<div class="form-group">
+				<label>Наименование</label>
+				<input type="text" class="form-control" required autofocus ng-model="current.name" />
+			</div>
+			<div class="form-group">
+				<label>Адрес</label>
+				<input type="text" class="form-control" required ng-model="current.address" />
+			</div>
+			<div class="form-group">
+				<label>Телефон</label>
+				<input type="tel" class="form-control" required ng-model="current.phone" />
+			</div>
+			<div class="form-group">
+				<label>E-mail</label>
+				<input type="email" class="form-control" required ng-model="current.email" />
+			</div>
+			<button type="submit" class="btn btn-primary btn-block" ng-click="NewUser(current, form_register)">Зарегистрироваться</button>
+			<p class="help-block">{{message}}</p>
+		</form>
+	</div>
+</section>
+</div>

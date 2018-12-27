@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru" ng-app="ssApp">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.ico">
+<title>SoftSale - Веб-сервис по принятию и оформлению заказов по продаже ПО</title>
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="assets/bootstrap/css/ie10-viewport-bug-workaround.css">
+<link rel="stylesheet" href="style.css">
+<!--[if lt IE 9]>
+	<script src="assets/bootstrap/js/html5shiv.min.js"></script>
+	<script src="assets/bootstrap/js/respond.min.js"></script>
+<![endif]-->
+<script src="assets/bootstrap/js/jquery.min.js"></script>
+</head>
+
+<body>
+<!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#!catalog">SoftSale</a>
+        </div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="#!catalog">Каталог</a></li>
+				<li ng-show="currentUser.is_seller == 1"><a href="#!seller">Продавец</a></li>
+				<li ng-show="currentUser.is_purchaser == 1"><a href="#!purchaser">Покупатель</a></li>
+				<li class="dropdown" ng-show="currentUser.role_id == 1">
+					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Справочники <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#!categories">Категории</a></li>
+						<li><a href="#!developers">Правообладатели</a></li>
+						<li><a href="#!clients">Клиенты</a></li>
+                		<li role="separator" class="divider"></li>
+						<li><a href="#!users">Пользователи</a></li>
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li ng-show="currentUser.role_id == 0"><a href="#!register">Регистрация</a></li>
+				<li ng-show="currentUser.role_id == 0"><a href="#!login">Вход</a></li>
+				<li ng-show="currentUser.role_id > 0"><a>[{{currentUser.login}}]</a></li>
+				<li ng-show="currentUser.role_id > 0"><a href="#" ng-click="LogOut()">Выход</a></li>
+				<li ng-show="currentUser.is_purchaser == 1"><a href="#!cart"><i class="glyphicon glyphicon-shopping-cart"></i></a></li>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</nav>
+<div class="container">
+<ng-view></ng-view>
+</div>
+<script src="assets/angular/angular.min.js"></script>
+<script src="assets/angular/angular-route.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/controllers/CatalogController.js"></script>
+<script src="js/controllers/LoginController.js"></script>
+<script src="js/controllers/CartController.js"></script>
+<script src="js/controllers/CategoriesController.js"></script>
+<script src="js/controllers/DevelopersController.js"></script>
+<script src="js/controllers/ClientsController.js"></script>
+<script src="js/controllers/UsersController.js"></script>
+<script src="js/controllers/SellerController.js"></script>
+<script src="js/controllers/PurchaserController.js"></script>
+<script src="js/controllers/RegisterController.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/bootstrap/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

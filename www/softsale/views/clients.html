@@ -1,0 +1,60 @@
+<div ng-controller="ClientsController" ng-switch on="sectionView">
+	<h1>
+		Клиенты (продавцы и покупатели)
+		<button class="btn btn-info btn-xs" title="Добавить" ng-click="NewItem()"><i class="glyphicon glyphicon-plus-sign"></i></button>
+	</h1>
+	<section ng-switch-when="lists">
+		<table class="table table-hover" ng-show="data.lists.length > 0">
+			<thead>
+				<tr>
+					<th class="col-xs-1 text-center">Код</th>
+					<th class="col-xs-4 text-center">Наименование</th>
+					<th class="col-xs-2 text-center">Телефон</th>
+					<th class="col-xs-3 text-center">E-mail</th>
+					<th class="col-xs-1 text-center">Продавец</th>
+					<th class="col-xs-1 text-center">Покупатель</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in data.lists" ng-click="ShowItem(item)">
+					<td class="text-center">{{item.id}}</td>
+					<td class="text-center">{{item.name}}</td>
+					<td class="text-center">{{item.phone}}</td>
+					<td class="text-center">{{item.email}}</td>
+					<td class="text-center"><span ng-show="item.is_seller">+</span></td>
+					<td class="text-center"><span ng-show="item.is_purchaser">+</span></td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="alert alert-warning" ng-hide="data.lists.length > 0">Записи не найдены...</p>
+	</section>
+	<section ng-switch-when="form">
+		<form name="form_edit" role="form">
+			<div class="form-group">
+				<label>Наименование</label>
+				<input type="text" class="form-control" required autofocus ng-model="current.name" />
+			</div>
+			<div class="form-group">
+				<label>Адрес</label>
+				<input type="text" class="form-control" ng-model="current.address" />
+			</div>
+			<div class="form-group">
+				<label>Телефон</label>
+				<input type="tel" class="form-control" ng-model="current.phone" />
+			</div>
+			<div class="form-group">
+				<label>E-mail</label>
+				<input type="email" class="form-control" required ng-model="current.email" />
+			</div>
+			<div class="checkbox">
+				<label><input type="checkbox" ng-model="current.is_seller"> Продавец</label>
+			</div>
+			<div class="checkbox">
+				<label><input type="checkbox" ng-model="current.is_purchaser"> Покупатель</label>
+			</div>
+			<button class="btn btn-info" type="submit" title="Сохранить" ng-click="SaveItem(current, form_edit)"><i class="glyphicon glyphicon-floppy-disk"></i></button>
+			<button class="btn btn-info" title="Удалить" ng-click="DeleteItem(current)" ng-show="current.id > 0"><i class="glyphicon glyphicon-trash"></i></button>
+			<button class="btn btn-info" title="Отмена" ng-click="LoadItems()"><i class="glyphicon glyphicon-circle-arrow-left"></i></button>
+		</form>
+	</section>
+</div>

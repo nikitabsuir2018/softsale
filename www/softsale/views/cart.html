@@ -1,0 +1,41 @@
+<div ng-controller="CartController">
+<section>
+	<h1>Корзина</h1>
+	<div  ng-show="currentCart.length > 0">
+		<table class="table">
+			<thead>
+				<tr>
+					<th class="col-xs-8 text-center">Программное обеспечение</th>
+					<th class="col-xs-1 text-center">Цена</th>
+					<th class="col-xs-1 text-center">Количество</th>
+					<th class="col-xs-1 text-center">Сумма</th>
+					<th class="col-xs-1 text-center"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in currentCart">
+					<td class="text-left">
+						{{item.name}}<br>
+						<small>
+							<span class="text-info">{{item.developer_name}}</span> / 
+							<span class="text-info">{{item.category_name}}</span> / 
+							<span class="text-info">{{item.seller_name}}</span>
+						</small>
+					</td>
+					<td class="text-center">{{item.price}}</td>
+					<td class="text-center">
+						<input class="form-control" type="number" min="1" max="999" ng-model="item.quantity">
+					</td>
+					<td class="text-center">{{item.price * item.quantity}}</td>
+					<td class="text-center">
+						<button class="btn btn-info btn-xs" title="Удалить" ng-click="RemoveFromCart(item.id)"><i class="glyphicon glyphicon-trash"></i></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<button class="btn btn-info" ng-click="NewOrder()"><i class="glyphicon glyphicon-floppy-saved"></i> Заказать</button>
+		<button class="btn btn-info" ng-click="ClearCart()"><i class="glyphicon glyphicon-floppy-remove"></i> Очистить</button>
+	</div>
+    <p class="alert alert-warning" ng-hide="currentCart.length > 0">Корзина пуста...</p>
+</section>
+</div>

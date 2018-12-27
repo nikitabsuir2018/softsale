@@ -1,0 +1,54 @@
+<div class="container" ng-controller="UsersController" ng-switch on="sectionView">
+	<h1>
+		Пользователи
+		<button class="btn btn-info btn-xs" title="Добавить" ng-click="NewItem()"><i class="glyphicon glyphicon-plus-sign"></i></button>
+	</h1>
+	<section ng-switch-when="lists">
+		<table class="table table-hover" ng-show="data.lists.length > 0">
+			<thead>
+				<tr>
+					<th class="col-xs-1 text-center">Код</th>
+					<th class="col-xs-4 text-center">Логин</th>
+					<th class="col-xs-4 text-center">Клиент</th>
+					<th class="col-xs-3 text-center">Роль</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in data.lists" ng-click="ShowItem(item)">
+					<td class="text-center">{{item.id}}</td>
+					<td class="text-center">{{item.login}}</td>
+					<td class="text-center">{{item.client_name}}</td>
+					<td class="text-center">{{item.role_name}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="alert alert-warning" ng-hide="data.lists.length > 0">Записи не найдены...</p>
+	</section>
+	<section ng-switch-when="form">
+		<form name="form_edit" role="form">
+			<div class="form-group">
+				<label>Логин</label>
+				<input type="text" class="form-control" required autofocus ng-model="current.login" />
+			</div>
+			<div class="form-group">
+				<label><input type="checkbox" ng-model="current.change_password" /> Изменить пароль</label>
+				<input type="password" class="form-control" required ng-model="current.password" />
+			</div>
+			<div class="form-group">
+				<label>Клиент</label>
+				<select class="form-control" required ng-model="current.client_id">
+					<option ng-repeat="item in data.clients_list" value="{{item.id}}">{{item.name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Роль</label>
+				<select class="form-control" required ng-model="current.role_id">
+					<option ng-repeat="item in data.roles_list" value="{{item.id}}">{{item.name}}</option>
+				</select>
+			</div>
+			<button class="btn btn-info" type="submit" title="Сохранить" ng-click="SaveItem(current, form_edit)"><i class="glyphicon glyphicon-floppy-disk"></i></button>
+			<button class="btn btn-info" title="Удалить" ng-click="DeleteItem(current)" ng-show="current.id > 0"><i class="glyphicon glyphicon-trash"></i></button>
+			<button class="btn btn-info" title="Отмена" ng-click="LoadItems()"><i class="glyphicon glyphicon-circle-arrow-left"></i></button>
+		</form>
+	</section>
+</div>
